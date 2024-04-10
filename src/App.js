@@ -9,20 +9,21 @@ export const App = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ json: () => DATA });
-      }, 1000);
-    })
-      .then((loadedData) => loadedData.json())
-      .then((loadedProducts) => {
-        setProducts(loadedProducts);
-      })
-      .finally(() => setIsLoading(false));
-
-    // fetch('https://mocki.io/v1/ef63ec9a-c715-43b7-b4cc-b379614e95a8')
+    // new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve({ json: () => DATA });
+    //   }, 1000);
+    // })
     //   .then((loadedData) => loadedData.json())
-    //   .then((loadedProducts) => setProducts(loadedProducts));
+    //   .then((loadedProducts) => {
+    //     setProducts(loadedProducts);
+    //   })
+    //   .finally(() => setIsLoading(false));
+
+    fetch('http://localhost:3005/products')
+      .then((loadedData) => loadedData.json())
+      .then((loadedProducts) => setProducts(loadedProducts))
+      .finally(() => setIsLoading(false));
   }, []);
 
   return (
