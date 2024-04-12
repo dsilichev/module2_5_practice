@@ -11,7 +11,7 @@ export const App = () => {
   const [refreshProductsFlag, setrefreshProductsFlag] = useState(false);
   const refreshProducts = () => setrefreshProductsFlag(!refreshProductsFlag);
 
-  const {isLoading, products} = useRequestGetProducts(refreshProductsFlag);
+  const {isLoading, products} = useRequestGetProducts();
   const {isCreating, requestAdd} = useRequestAdd(refreshProducts);
   const {isUpdating, requestUpdate} = useRequestUpdate(refreshProducts);
   const {isDeleting, requestDelete} = useRequestDelete(refreshProducts);
@@ -89,7 +89,7 @@ export const App = () => {
       {isLoading ? (
         <div className={styles.loader}></div>
       ) : (
-        products.map(({ id, name, price }) => (
+        Object.entries(products).map(([ id, { name, price }]) => (
           <div key={id}>
             {name} - {price} руб.
           </div>
